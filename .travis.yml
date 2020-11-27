@@ -1,27 +1,35 @@
-language: generic
 sudo: required
-
+language: generic
 
 services:
     - docker
 
 before_install:
-    - docker build -t amitbiderman/docker-react -f ./client/Dockerfile.dev ./client
+  - docker build -t amitbiderman/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true amitbiderman/docker-react npm run test
+  - docker run -e CI=true amitbiderman/react-test npm test
+
 
 after_success:
-    - docker build -t amitbiderman/multi-client ./client
-    - docker build -t amitbiderman/multi-nginx ./nginx
-    - docker build -t amitbiderman/multi-server ./server
-    - docker build -t amitbiderman/multi-worker ./worker
+  - docker build -t amitbiderman/multi-client ./client
+  - docker build -t amitbiderman/multi-nginx ./nginx
+  - docker build -t amitbiderman/multi-server ./server
+  - docker build -t amitbiderman/multi-worker ./worker
   
-    # Logging in to docker cli
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  
+  # Take those images and push them to docker hub
+  - docker push amitbiderman/multi-client
+  - docker push amitbiderman/multi-nginx
+  - docker push amitbiderman/multi-server
+  - docker push amitbiderman/multi-worker
 
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    # Take those images and push them to docker hub
-    - docker push amitbiderman/multi-client
-    - docker push amitbiderman/multi-nginx
-    - docker push amitbiderman/multi-server
-    - docker push amitbiderman/multi-worker
+
+
+
+
+
+
+
