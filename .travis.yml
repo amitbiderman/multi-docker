@@ -1,0 +1,27 @@
+language: generic
+sudo: required
+
+
+services:
+    - docker
+
+before_install:
+    - docker build -t amitbiderman/docker-react -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true amitbiderman/docker-react npm run test
+
+after_success:
+    - docker build -t amitbiderman/multi-client ./client
+    - docker build -t amitbiderman/multi-nginx ./nginx
+    - docker build -t amitbiderman/multi-server ./server
+    - docker build -t amitbiderman/multi-worker ./worker
+
+# Log in to the docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" -- password-stdin
+
+# Push images to docker hub
+    - docker push amitbiderman/multi-client 
+    - docker push amitbiderman/multi-nginx 
+    - docker push amitbiderman/multi-server 
+    - docker push amitbiderman/multi-worker
