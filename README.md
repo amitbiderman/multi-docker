@@ -1,4 +1,4 @@
-# Multi-Container Docker Application 
+# Multi-Container Docker Web Application 
 # Integrating with Travis CI
 # Deployment to AWS
 ![alt text](https://github.com/amitbiderman/multi-docker/blob/master/image.png)
