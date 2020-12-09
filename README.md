@@ -22,8 +22,8 @@ Including proper Development environment
 And Production environment :
 
 
-- <img src="https://img.icons8.com/color/40/000000/travis-ci.png"/> Every commit is tested by Travis CI
+<img src="https://img.icons8.com/color/40/000000/travis-ci.png"/> Every commit is tested by Travis CI
 
-- <img src="https://img.icons8.com/dusk/40/000000/docker.png"/> The entire project is pushed to Docker Hub
+<img src="https://img.icons8.com/dusk/40/000000/docker.png"/> The entire project is pushed to Docker Hub
 
-- <img src="https://img.icons8.com/color/40/000000/amazon-web-services.png"/>  And Deployed to AWS, Using multiple services
+<img src="https://img.icons8.com/color/40/000000/amazon-web-services.png"/>  And Deployed to AWS, Using multiple services
